@@ -1,0 +1,286 @@
+
+@import 'custom.scss';
+@import '_globals.scss';
+
+$colors: (
+   Soft red: hsl(7, 99%, 70%),
+   Yellow: hsl(51, 100%, 49%),
+   Dark desaturated cyan: hsl(167, 40%, 24%),
+   Dark blue: hsl(198, 62%, 26%),
+   Dark moderate cyan: hsl(168, 34%, 41%),
+   Very dark desaturated blue: hsl(212, 27%, 19%),
+   Very dark grayish blue: hsl(213, 9%, 39%),
+   Dark grayish blue: hsl(232, 10%, 55%),
+   Grayish blue: hsl(210, 4%, 67%),
+   White: hsl(0, 0%, 100%),
+   White2: hsla(0,0%,100%,0.4),
+);
+$fallback-colors: (
+   #FF9966 #FFCC00 #99CC99 #003366 #339966 #006699 #336666 #669999 #999999 #FFFFFF #ffffff1
+);
+
+@mixin font-color($color, $fallback-color) {
+  color: $fallback-color;
+  color: $color;
+}
+
+@mixin bg-color($color, $fallback-color) {
+  background-color: $fallback-color;
+  background-color: $color;
+}
+
+@mixin width($grid-size) {
+  width: $grid-size * 1px;
+}
+@mixin border-radius($radius...) {
+  border-radius: $radius;
+}
+@mixin margin($args...) {
+  margin: $args;
+}
+@mixin padding($args...) {
+  padding: $args;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  @include bg-color(map-get($colors,Very dark desaturated blue),nth($fallback-colors,6));
+  font{
+     size: $font_size-16;
+     weight: $font_weight-normal;
+	 family: 'Barlow', sans-serif;
+  }
+}
+.blue{border: 5px solid blue;}
+.red{ border: 5px solid red;}
+
+main.container {
+    @include width($container__form-xs);
+	@include bg-color(map-get($colors,Very dark desaturated blue),nth($fallback-colors,6));
+    //display:grid;
+	height: 100%;
+	//place-contents:center;
+	@include margin(100px,auto);
+	
+	#header{
+	   .fixed{
+	      min-height:400px;
+	   }
+	   background: url('./images/mobile/image-header.jpg') top left / 100% 100% no-repeat;
+	   //font color will be applied to desktop
+	   @include font-color(map-get($colors,White),nth($fallback-colors,10));
+	   #menubutton{
+	      border:none;
+	      opacity:1;
+	   }
+	   .navbar-toggler:focus,
+       .navbar-toggler:active,
+       .navbar-toggler-icon:focus {
+          outline: none;
+          box-shadow: none;
+       }
+	   #contact{
+          @include bg-color(map-get($colors,Yellow),nth($fallback-colors,2));
+		  @include border-radius(15px);
+		  width: 100px;
+		  border:none;
+		  @include margin(15px auto);
+	      @media screen and(min-width:$container__form-xxl * 1px){
+		     @include margin(0);
+		     @include bg-color(map-get($colors,White),nth($fallback-colors,10));
+			 @include font-color(map-get($colors,Very dark desaturated blue),nth($fallback-colors,6));
+	         &:focus{
+		        @include bg-color(map-get($colors,White2),nth($fallback-colors,11));
+			    @include font-color(map-get($colors,White),nth($fallback-colors,10));
+		     }
+		  }
+	   }
+	   h1{
+	     position:relative;
+		 bottom: 110px;
+		 font-weight:$font_weight-ultrabold;
+		 font-family: 'Fraunces', serif;
+	   }
+	   #arrow{
+		   position:relative;
+		   left: 46%;
+		   bottom: 170px;
+		   @media screen and(min-width:$container__form-xxl * 1px){
+		       left:48%;
+		       bottom: 150px;
+		   }
+	   }
+	   @media screen and(max-width:$container__form-xxl-min * 1px){
+	      nav{
+		     min-width: 300px;
+	         position:relative;
+			 right:140px;
+			 z-index:1;
+			 
+			 .navbar-nav::after{
+			    content: '';
+                position: absolute;
+                width: 20px;
+				bottom:320px;
+                left: 250px;
+				transform:skew(20deg);
+                border: 20px solid transparent;
+                border-bottom-color: #fff;
+			 }
+	         .navbar-nav{
+				width: 300px;
+			    height: 300px;
+	            @include bg-color(map-get($colors,White),nth($fallback-colors,10));
+			    @include font-color(map-get($colors,Very dark desaturated blue),nth($fallback-colors,6));
+			    a{
+			       text-align:center;
+				   @include margin(15px 0 0 0);
+			    }
+	          }
+		  }
+	   }
+	   @media screen and(min-width:$container__form-xxl * 1px){
+	      background: url('./images/desktop/image-header.jpg') top center / 100% 100% no-repeat;
+	   }
+	}
+	font{
+	   size: $font_size-16 * 1.2;
+    }
+	
+	div.container{
+         .mobile{
+	        display:block;
+			@media screen and(min-width:$container__form-xxl * 1px){
+			   display:none;
+			}
+	     }
+         .desktop{
+            display:none;
+			@media screen and(min-width:$container__form-xxl * 1px){
+			    display:block;
+			}
+         }	
+		 h2{
+		   font-family: 'Barlow', sans-serif;
+		   font-weight:$font_weight-bold;
+		   font-size: 3em;
+		   @include font-color(map-get($colors,Very dark desaturated blue),nth($fallback-colors,6));
+		 }
+		 section  {
+		    a.learn{
+		       @include font-color(map-get($colors,Very dark desaturated blue),nth($fallback-colors,6));
+			   text-decoration-thickness: 3px;
+			}
+			div:first-of-type a.learn{
+			   text-decoration-color: map-get($colors,Soft red);
+			}
+			&:nth-of-type(2) div:nth-of-type(2) a.learn{
+               text-decoration-color: map-get($colors,Yellow);
+            }
+		 }
+   	     .white{
+		    @include bg-color(map-get($colors,White),nth($fallback-colors,10));
+		 }
+	     .image-type-1{
+	        position:relative;
+	        right:212px;
+	        bottom: 137px;
+	        transform: scale(0.47,0.56);
+			@media screen and(min-width:$container__form-xxl * 1px){
+			    right: 87px;
+		        bottom: 125px;
+	            transform: scale(0.79,0.58); //height 600px
+			}
+	     }
+		.graphic{
+		    @include font-color(map-get($colors,Dark desaturated cyan),nth($fallback-colors,3));
+		    background: url('./images/mobile/image-graphic-design.jpg') top left / 100% 100% no-repeat;
+			@media screen and(min-width:$container__form-xxl * 1px){
+			  background: url('./images/desktop/image-graphic-design.jpg') top left / 100% 100% no-repeat;
+			}
+		}
+		.photo{
+			@include font-color(map-get($colors,Dark blue),nth($fallback-colors,4));
+		    background: url('./images/mobile/image-photography.jpg') top left / 100% 100% no-repeat;
+			@media screen and(min-width:$container__form-xxl * 1px){
+			  background: url('./images/desktop/image-photography.jpg') top left / 100% 100% no-repeat;
+			}
+		}
+		.min-height{
+		    //adjust to the same height as other sections , because of lower height requirment with only text content
+		    min-height: 350px;
+		}
+	    .max-height{
+		    //adjusts to the new visual height for the images (because of use of transform).
+	        max-height: 350px;
+		}
+	    #article{
+	       .person{
+		      @include border-radius(50%);
+		      transform: scale(0.8,0.8);
+		      @media screen and(min-width: $container__form-xxl * 1px){
+		         transform: scale(0.6,0.6);
+		      }
+		   }
+	    }
+	    div{
+		  .height{
+		      //adjusts to the new visual height for the images (because of use of transform).
+		      max-height: 173px;       //376px * 0.46
+			  @media screen and(min-width:$container__form-xxl * 1px){
+			     max-height: 340px;    //894px * 0.38  
+			  }
+		  }
+	      .image-type-2 {
+		      position:relative;
+			  left:-112px;
+			  top:-100px;
+		      transform: scale(0.47,0.46);
+			  @media screen and(min-width:$container__form-xxl * 1px){
+			    left:-230px;
+		        top: -270px;
+	            transform: scale(0.40,0.39); //height 894px  348px(600px * 0.58(.image-type-1)) calc: 894px * X = 348px
+			}
+		  }
+	    }
+		#footer{
+		    min-height: 200px;
+		    ul{
+			   list-style-type: none;
+			}
+			a{
+			  text-decoration:none;
+			}
+			h4,i,a{
+		      @include font-color(map-get($colors,Dark desaturated cyan),nth($fallback-colors,3 ));
+			}
+		    @include bg-color(lighten(map-get($colors,Dark moderate cyan),20),nth($fallback-colors,5));
+		}
+	  
+  }
+  @media screen and (min-width: $container__form-xxl * 1px) {
+	   
+       @include width($container__form-xxl);
+	   @include padding(150px);  
+  }
+}
+
+footer {
+  .attribution {
+    font-size: $font_size-8;
+    text-align: center;
+  }
+  .attribution a {
+    color: hsl(228, 45%, 44%);
+  }
+}
