@@ -28,7 +28,7 @@ Users should be able to:
 
 ### Screenshot
 
-![./images/](screenshot.PNG)
+![screenshot](./images/screenshot.PNG "screenshot")
 
 ### Links
 
@@ -48,7 +48,8 @@ Users should be able to:
 
 ### What I learned
 - I had some layout problems due to the simple fact I was using 
-     ```display:grid; display grid;
+     ```
+	    display:grid; display grid;
         place-contents:center;
      ```
   instead of margin to center the layout in mobile. These are little subtleties that are still hard to understand for me. Also, using grid caused child elements to be wider.
